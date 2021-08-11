@@ -13,6 +13,8 @@ public class HexMesh : MonoBehaviour
 	MeshCollider meshCollider;
 	List<Color> colors;
 
+	public int elevation;
+	public const float elevationStep = 5f;
 	#endregion
 
 	void Awake()
