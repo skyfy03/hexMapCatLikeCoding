@@ -22,12 +22,10 @@ public class HexCell : MonoBehaviour
 			elevation = value;
 			Vector3 position = transform.localPosition;
 			position.y = value * HexMetrics.elevationStep;
-			position.y += 
-				(HexMetrics.SampleNoise(position).y * 2f - 1f) * HexMetrics.elevationPerturbStrength;
 			transform.localPosition = position;
 
 			Vector3 uiPosition = uiRect.localPosition;
-			uiPosition.z = -position.y;
+			uiPosition.z = elevation * -HexMetrics.elevationStep;
 			uiRect.localPosition = uiPosition;
 		}
 	}
@@ -68,16 +66,6 @@ public class HexCell : MonoBehaviour
 		return HexMetrics.GetEdgeType(
 			elevation, otherCell.elevation
 		);
-	}
-	#endregion
-
-	#region Position
-	public Vector3 Position
-	{
-		get
-		{
-			return transform.localPosition;
-		}
 	}
 	#endregion
 

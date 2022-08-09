@@ -6,7 +6,7 @@ public class HexMetrics : MonoBehaviour
 
     public const float outerRadius = 10f;
     public const float innerRadius = outerRadius * 0.866025404f;
-	public const float elevationStep = 3f;//elevation level
+	public const float elevationStep = 5f;
 
 	static Vector3[] corners = {
 		new Vector3(0f, 0f, outerRadius),
@@ -18,11 +18,11 @@ public class HexMetrics : MonoBehaviour
 		new Vector3(0f, 0f, outerRadius)
 	};
 
-	public const float solidFactor = 0.75f; //increasing this makes the hexcell flatter for content
+	public const float solidFactor = 0.75f;
 
 	public const float blendFactor = 1f - solidFactor;
 
-	#region Terrace
+	#region terrace
 	public const int terracesPerSlope = 2;
 
 	public const int terraceSteps = terracesPerSlope * 2 + 1;
@@ -72,29 +72,10 @@ public class HexMetrics : MonoBehaviour
 
 	#endregion
 
-	#region noiseSource
-	public static Texture2D noiseSource;
-
-	public static Vector4 SampleNoise(Vector3 position)
-	{
-		return noiseSource.GetPixelBilinear(
-			position.x * noiseScale, 
-			position.z * noiseScale
-		);
-	}
-
-	public const float cellPerturbStrength = 4f; //5f; should be the max
-
-	public const float noiseScale = 0.003f;
-
-	public const float elevationPerturbStrength = 1.5f;
-	#endregion
-
 	public static Vector3 GetFirstCorner(HexDirection direction)
 	{
 		return corners[(int)direction];
 	}
-
 	public static Vector3 GetSecondCorner(HexDirection direction)
 	{
 		return corners[(int)direction + 1];
