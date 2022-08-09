@@ -21,10 +21,13 @@ public class HexGrid : MonoBehaviour
 	public Color defaultColor = Color.white;
 	public Color touchedColor = Color.magenta;
 
+	public Texture2D noiseSource;
+
 	#endregion
 
 	void Awake()
 	{
+		HexMetrics.noiseSource = noiseSource;
 		gridCanvas = GetComponentInChildren<Canvas>();
 		hexMesh = GetComponentInChildren<HexMesh>();
 
@@ -90,6 +93,7 @@ public class HexGrid : MonoBehaviour
 		label.text = cell.coordinates.ToStringOnSeparateLines();
 
 		cell.uiRect = label.rectTransform;
+		cell.Elevation = 0;
 	}
 
 	public void Refresh()
@@ -103,5 +107,10 @@ public class HexGrid : MonoBehaviour
 		HexCoordinates coordinates = HexCoordinates.FromPosition(position);
 		int index = coordinates.X + coordinates.Z * width + coordinates.Z / 2;
 		return cells[index];
+	}
+
+	void OnEnable()
+	{
+		HexMetrics.noiseSource = noiseSource;
 	}
 }
