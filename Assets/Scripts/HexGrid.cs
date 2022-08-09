@@ -89,6 +89,7 @@ public class HexGrid : MonoBehaviour
 
 		label.text = cell.coordinates.ToStringOnSeparateLines();
 
+		cell.uiRect = label.rectTransform;
 	}
 
 	public void Refresh()
