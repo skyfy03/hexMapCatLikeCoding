@@ -90,6 +90,9 @@ public class HexMetrics : MonoBehaviour
 	public const float elevationPerturbStrength = 1.5f;
 	#endregion
 
+	public const int chunkSizeX = 5;
+	public const int chunkSizeZ = 5;
+
 	public static Vector3 GetFirstCorner(HexDirection direction)
 	{
 		return corners[(int)direction];

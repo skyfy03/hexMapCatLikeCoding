@@ -14,6 +14,9 @@ public class HexMapEditor : MonoBehaviour
 
 	int activeElevation;
 
+	public const int chunkSizeX = 5;
+	public const int chunkSizeZ = 5;
+
 	#endregion
 
 	void Awake()
@@ -41,9 +44,8 @@ public class HexMapEditor : MonoBehaviour
 
 	void EditCell(HexCell cell)
 	{
-		cell.color = activeColor;
+		cell.Color = activeColor;
 		cell.Elevation = activeElevation;
-		hexGrid.Refresh();
 	}
 
 	public void SelectColor(int index)
