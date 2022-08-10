@@ -4,8 +4,14 @@ using UnityEngine;
 public class HexMetrics : MonoBehaviour
 {
 
-    public const float outerRadius = 10f;
-    public const float innerRadius = outerRadius * 0.866025404f;
+	#region Fields
+
+	public const float outerToInner = 0.866025404f;
+	public const float innerToOuter = 1f / outerToInner;
+
+	public const float outerRadius = 10f;
+
+	public const float innerRadius = outerRadius * outerToInner;
 	public const float elevationStep = 3f;//elevation level
 
 	static Vector3[] corners = {
@@ -31,29 +37,61 @@ public class HexMetrics : MonoBehaviour
 
 	public const float verticalTerraceStepSize = 1f / (terracesPerSlope + 1);
 
-	public static Vector3 TerraceLerp(Vector3 a, Vector3 b, int step)
-	{
-		float h = step * HexMetrics.horizontalTerraceStepSize;
-		a.x += (b.x - a.x) * h;
-		a.z += (b.z - a.z) * h;
-		float v = ((step + 1) / 2) * HexMetrics.verticalTerraceStepSize;
-		a.y += (b.y - a.y) * v;
-		return a;
-	}
+	#endregion
 
-	public static Color TerraceLerp(Color a, Color b, int step)
+	#region HexEdgeType
+
+	public enum HexEdgeType
 	{
-		float h = step * HexMetrics.horizontalTerraceStepSize;
-		return Color.Lerp(a, b, h);
+		Flat, Slope, Cliff
 	}
 
 	#endregion
 
-	#region HexEdgeType
-	
-	public enum HexEdgeType
+	#region noiseSource
+	public static Texture2D noiseSource;
+
+	public const float cellPerturbStrength = 0f;//4f; //5f; should be the max
+
+	public const float noiseScale = 0.003f;
+
+	public const float elevationPerturbStrength = 1.5f;
+	#endregion
+
+	public const int chunkSizeX = 5;
+	public const int chunkSizeZ = 5;
+
+	public const float streamBedElevationOffset = -1f;
+
+	#endregion
+
+	public static Vector3 Perturb(Vector3 position)
 	{
-		Flat, Slope, Cliff
+		Vector4 sample = SampleNoise(position);
+
+		position.x += (sample.x * 2f - 1f) * cellPerturbStrength;
+
+		//Keeps the middle flat, so labels are easy to read. Also terraces look good too
+		//position.y += (sample.y * 2f - 1f) * HexMetrics.cellPerturbStrength;
+
+		position.z += (sample.z * 2f - 1f) * cellPerturbStrength;
+
+		return position;
+	}
+
+	public static Vector3 GetSolidEdgeMiddle(HexDirection direction)
+	{
+		return
+			(corners[(int)direction] + corners[(int)direction + 1]) *
+			(0.5f * solidFactor);
+	}
+
+	public static Vector4 SampleNoise(Vector3 position)
+	{
+		return noiseSource.GetPixelBilinear(
+			position.x * noiseScale, 
+			position.z * noiseScale
+		);
 	}
 
 	public static HexEdgeType GetEdgeType(int elevation1, int elevation2)
@@ -70,28 +108,21 @@ public class HexMetrics : MonoBehaviour
 		return HexEdgeType.Cliff;
 	}
 
-	#endregion
-
-	#region noiseSource
-	public static Texture2D noiseSource;
-
-	public static Vector4 SampleNoise(Vector3 position)
+	public static Vector3 TerraceLerp(Vector3 a, Vector3 b, int step)
 	{
-		return noiseSource.GetPixelBilinear(
-			position.x * noiseScale, 
-			position.z * noiseScale
-		);
+		float h = step * HexMetrics.horizontalTerraceStepSize;
+		a.x += (b.x - a.x) * h;
+		a.z += (b.z - a.z) * h;
+		float v = ((step + 1) / 2) * HexMetrics.verticalTerraceStepSize;
+		a.y += (b.y - a.y) * v;
+		return a;
 	}
 
-	public const float cellPerturbStrength = 4f; //5f; should be the max
-
-	public const float noiseScale = 0.003f;
-
-	public const float elevationPerturbStrength = 1.5f;
-	#endregion
-
-	public const int chunkSizeX = 5;
-	public const int chunkSizeZ = 5;
+	public static Color TerraceLerp(Color a, Color b, int step)
+	{
+		float h = step * HexMetrics.horizontalTerraceStepSize;
+		return Color.Lerp(a, b, h);
+	}
 
 	public static Vector3 GetFirstCorner(HexDirection direction)
 	{

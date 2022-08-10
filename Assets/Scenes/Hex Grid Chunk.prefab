@@ -91,7 +91,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4207561181588828471}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 998a1896006204f4dbd18d7e4219c706, type: 3}
+  m_Script: {fileID: 11500000, guid: 181148d8b4d0acc4983a6d295305bfd4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   elevation: 0
@@ -140,6 +140,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8853a44b21f797247816270be262b46f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  terrain: {fileID: 3478632915424766816}
 --- !u!1 &8188375250940201132
 GameObject:
   m_ObjectHideFlags: 0
