@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class HexGrid : MonoBehaviour
 {
+
 	#region Fields
 
 	int cellCountX;
@@ -23,7 +24,6 @@ public class HexGrid : MonoBehaviour
 	public Texture2D noiseSource;
 
 	public HexGridChunk chunkPrefab;
-
 	HexGridChunk[] chunks;
 
 	#endregion
@@ -133,8 +133,32 @@ public class HexGrid : MonoBehaviour
 		return cells[index];
 	}
 
+	public HexCell GetCell(HexCoordinates coordinates)
+	{
+		int z = coordinates.Z;
+		if (z < 0 || z >= cellCountZ)
+		{
+			return null;
+		}
+		int x = coordinates.X + z / 2;
+		if (x < 0 || x >= cellCountX)
+		{
+			return null;
+		}
+		return cells[x + z * cellCountX];
+	}
+
 	void OnEnable()
 	{
 		HexMetrics.noiseSource = noiseSource;
 	}
+
+	public void ShowUI(bool visible)
+	{
+		for (int i = 0; i < chunks.Length; i++)
+		{
+			chunks[i].ShowUI(visible);
+		}
+	}
+
 }
