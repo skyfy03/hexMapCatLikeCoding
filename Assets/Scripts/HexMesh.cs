@@ -49,6 +49,10 @@ public class HexMesh : MonoBehaviour
 		{
 			colors = ListPool<Color>.Get();
 		}
+		if (useUVCoordinates)
+		{
+			uvs = ListPool<Vector2>.Get();
+		}
 		triangles = ListPool<int>.Get();
 	}
 

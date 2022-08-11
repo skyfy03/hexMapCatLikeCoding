@@ -12,7 +12,7 @@ public class HexMetrics : MonoBehaviour
 	public const float outerRadius = 10f;
 
 	public const float innerRadius = outerRadius * outerToInner;
-	public const float elevationStep = 3f;//elevation level
+	public const float elevationStep = 2f;//elevation level
 
 	static Vector3[] corners = {
 		new Vector3(0f, 0f, outerRadius),
