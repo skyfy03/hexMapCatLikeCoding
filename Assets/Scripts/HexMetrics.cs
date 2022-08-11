@@ -51,7 +51,7 @@ public class HexMetrics : MonoBehaviour
 	#region noiseSource
 	public static Texture2D noiseSource;
 
-	public const float cellPerturbStrength = 0f;//4f; //5f; should be the max
+	public const float cellPerturbStrength = 4f; //5f; should be the max
 
 	public const float noiseScale = 0.003f;
 
@@ -61,7 +61,9 @@ public class HexMetrics : MonoBehaviour
 	public const int chunkSizeX = 5;
 	public const int chunkSizeZ = 5;
 
-	public const float streamBedElevationOffset = -1f;
+	public const float streamBedElevationOffset = -1.75f;
+
+	public const float riverSurfaceElevationOffset = -0.5f;
 
 	#endregion
 
