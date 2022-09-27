@@ -63,7 +63,7 @@ public class HexMetrics : MonoBehaviour
 
 	public const float streamBedElevationOffset = -1.75f;
 
-	public const float riverSurfaceElevationOffset = -0.5f;
+	public const float waterElevationOffset = -0.5f;
 
 	#endregion
 
