@@ -1,5 +1,4 @@
-float Foam(float shore, float2 worldXZ, sampler2D noiseTex) {
-
+float Foam (float shore, float2 worldXZ, sampler2D noiseTex) {
 	shore = sqrt(shore);
 
 	float2 noiseUV = worldXZ + _Time.y * 0.25;
@@ -16,8 +15,7 @@ float Foam(float shore, float2 worldXZ, sampler2D noiseTex) {
 	return max(foam1, foam2) * shore;
 }
 
-float Waves(float2 worldXZ, sampler2D noiseTex) {
-
+float Waves (float2 worldXZ, sampler2D noiseTex) {
 	float2 uv1 = worldXZ;
 	uv1.y += _Time.y;
 	float4 noise1 = tex2D(noiseTex, uv1 * 0.025);
@@ -27,7 +25,7 @@ float Waves(float2 worldXZ, sampler2D noiseTex) {
 	float4 noise2 = tex2D(noiseTex, uv2 * 0.025);
 
 	float blendWave =
-		sin((worldXZ.x + worldXZ.z) * 0.1 + (noise1.y + noise2.z) + _Time.y);
+		sin((worldXZ.x + worldXZ.y) * 0.1 + (noise1.y + noise2.z) + _Time.y);
 	blendWave *= blendWave;
 
 	float waves =
