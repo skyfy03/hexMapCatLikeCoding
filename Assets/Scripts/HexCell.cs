@@ -294,6 +294,14 @@ public class HexCell : MonoBehaviour
 		}
 	}
 
+	public HexDirection RiverBeginOrEndDirection
+	{
+		get
+		{
+			return hasIncomingRiver ? incomingRiver : outgoingRiver;
+		}
+	}
+
 	#endregion
 
 	#region Roads
