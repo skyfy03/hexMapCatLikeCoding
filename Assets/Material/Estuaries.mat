@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Water Shore
+  m_Name: Estuaries
   m_Shader: {fileID: 4800000, guid: 7c2a19f115145094f82400fee1700946, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
