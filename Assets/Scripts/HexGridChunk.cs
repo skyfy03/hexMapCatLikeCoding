@@ -850,6 +850,20 @@ public class HexGridChunk : MonoBehaviour
 			new Vector2(0f, 1f), new Vector2(0f, 0f),
 			new Vector2(0f, 1f), new Vector2(0f, 0f)
 		);
+
+		estuaries.AddQuadUV2(
+			new Vector2(1.5f, 1f), new Vector2(.7f, 1.15f),
+			new Vector2(1f, 0.8f), new Vector2(0.5f, 1.1f)
+		);
+		estuaries.AddTriangleUV2(
+			new Vector2(0.5f, 1.1f),
+			new Vector2(1f, 0.8f),
+			new Vector2(0f, 0.8f)
+		);
+		estuaries.AddQuadUV2(
+			new Vector2(0.5f, 1.1f), new Vector2(.3f, 1.15f),
+			new Vector2(0f, 0.8f), new Vector2(-0.5f, 1f)
+		);
 	}
 
 	void TriangulateWaterfallInWater(Vector3 v1, Vector3 v2, Vector3 v3, Vector3 v4, float y1, float y2, float waterY)
