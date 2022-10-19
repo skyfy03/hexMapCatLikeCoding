@@ -35,6 +35,11 @@ public class HexMapEditor : MonoBehaviour
 	HexDirection dragDirection;
 	HexCell previousCell;
 
+	int activeUrbanLevel;
+	bool applyUrbanLevel;
+
+
+
 	#endregion
 
 	void Awake()
@@ -132,6 +137,10 @@ public class HexMapEditor : MonoBehaviour
 			{
 				cell.WaterLevel = activeWaterLevel;
 			}
+			if (applyUrbanLevel)
+			{
+				cell.UrbanLevel = activeUrbanLevel;
+			}
 			if (riverMode == OptionalToggle.No)
 			{
 				cell.RemoveRiver();
@@ -205,6 +214,16 @@ public class HexMapEditor : MonoBehaviour
 	public void SetRoadMode(int mode)
 	{
 		roadMode = (OptionalToggle)mode;
+	}
+
+	public void SetApplyUrbanLevel (bool toggle)
+	{
+		applyUrbanLevel = toggle;
+	}
+
+	public void SetUrbanLevel (float level)
+	{
+		activeUrbanLevel = (int)level;
 	}
 
 }
