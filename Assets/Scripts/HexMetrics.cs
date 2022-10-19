@@ -117,6 +117,17 @@ public class HexMetrics : MonoBehaviour
 		return hashGrid[x + z * hashGridSize];
 	}
 
+	static float[][] featureThresholds = {
+		new float[] {0.0f, 0.0f, 0.4f},
+		new float[] {0.0f, 0.4f, 0.6f},
+		new float[] {0.4f, 0.6f, 0.8f}
+	};
+
+	public static float[] GetFeatureThresholds(int level)
+	{
+		return featureThresholds[level];
+	}
+
 	#endregion
 
 	public static Vector3 Perturb(Vector3 position)

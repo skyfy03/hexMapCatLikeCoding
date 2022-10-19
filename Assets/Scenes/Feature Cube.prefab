@@ -43,7 +43,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e44a1623edd754343a3f64f813d4e78b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  urbanPrefabs:
-  - {fileID: 2228246828142089310, guid: 07a97c1473cf869459d41472c06e31f5, type: 3}
-  - {fileID: 2228246828142089310, guid: 3da14c9b6d784b74797e7671a0ccea83, type: 3}
-  - {fileID: 2228246828142089310, guid: c32428b17ab18294491ed04597d54a12, type: 3}
+  urbanCollections:
+  - prefabs:
+    - {fileID: 2228246828142089310, guid: c32428b17ab18294491ed04597d54a12, type: 3}
+    - {fileID: 2228246828142089310, guid: 1be2744c5c931ee40bf4ca4e900d0c7f, type: 3}
+  - prefabs:
+    - {fileID: 2228246828142089310, guid: 3da14c9b6d784b74797e7671a0ccea83, type: 3}
+    - {fileID: 2228246828142089310, guid: d9649a1b1201ed74ca886e47331a9ac8, type: 3}
+  - prefabs:
+    - {fileID: 2228246828142089310, guid: 07a97c1473cf869459d41472c06e31f5, type: 3}
+    - {fileID: 2228246828142089310, guid: 630719ee4a84ab94ab517a762a169dea, type: 3}
+  farmCollections:
+  - prefabs:
+    - {fileID: 2304566382762819579, guid: 6c40d16b7091ce94bbae1e3c90abda5d, type: 3}
+    - {fileID: 2304566382762819579, guid: 389c8c283ba2a4541980d8eaab76aa2f, type: 3}
+  - prefabs:
+    - {fileID: 2304566382762819579, guid: b90067382a38f93439bf076d97f33b0e, type: 3}
+    - {fileID: 2304566382762819579, guid: 541b2a915349cbd4097cae565527bf8c, type: 3}
+  - prefabs:
+    - {fileID: 2304566382762819579, guid: bd97ed8e4d490b34c8edcf4748deb8b9, type: 3}
+    - {fileID: 2304566382762819579, guid: 67376fbcbd90a04438782bce029c8b3e, type: 3}
+  plantCollections:
+  - prefabs:
+    - {fileID: 833375342908883006, guid: 3208317780ad42046b942ed937543061, type: 3}
+    - {fileID: 833375342908883006, guid: e2d2f43df4c6bd1469466e14d2435f9e, type: 3}
+  - prefabs:
+    - {fileID: 833375342908883006, guid: 48f9e57355a7fed4f8e4fe64298f8c04, type: 3}
+    - {fileID: 833375342908883006, guid: 1a82e16e79713d64fad7ab9cb9b6daf2, type: 3}
+  - prefabs:
+    - {fileID: 833375342908883006, guid: 919ea3f529151bc48b71523fb216a6e2, type: 3}
+    - {fileID: 833375342908883006, guid: f20f538b6d15f0c47b2161be5b211d68, type: 3}
