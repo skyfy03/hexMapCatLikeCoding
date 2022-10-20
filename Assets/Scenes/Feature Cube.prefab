@@ -73,3 +73,4 @@ MonoBehaviour:
   - prefabs:
     - {fileID: 833375342908883006, guid: 919ea3f529151bc48b71523fb216a6e2, type: 3}
     - {fileID: 833375342908883006, guid: f20f538b6d15f0c47b2161be5b211d68, type: 3}
+  walls: {fileID: 8470245168750680727, guid: 545c6b9cd0de68b42b7ee7ec68e20ee0, type: 3}
