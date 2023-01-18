@@ -14,6 +14,8 @@ public class HexFeatureManager : MonoBehaviour
 
 	public HexMesh walls;
 
+	public Transform wallTower;
+
 	#endregion
 
 	public void Clear() {
@@ -108,7 +110,7 @@ public class HexFeatureManager : MonoBehaviour
 		}
 	}
 
-	void AddWallSegment(Vector3 nearLeft, Vector3 farLeft, Vector3 nearRight, Vector3 farRight)
+	void AddWallSegment(Vector3 nearLeft, Vector3 farLeft, Vector3 nearRight, Vector3 farRight, bool addTower = false)
 	{
 		nearLeft = HexMetrics.Perturb(nearLeft);
 		farLeft = HexMetrics.Perturb(farLeft);
@@ -140,6 +142,16 @@ public class HexFeatureManager : MonoBehaviour
 		walls.AddQuadUnperturbed(v2, v1, v4, v3);
 
 		walls.AddQuadUnperturbed(t1, t2, v3, v4);
+
+		if (addTower)
+		{
+			Transform towerInstance = Instantiate(wallTower);
+			towerInstance.transform.localPosition = (left + right) * 0.5f;
+			Vector3 rightDirection = right - left;
+			rightDirection.y = 0f;
+			towerInstance.transform.right = rightDirection;
+			towerInstance.SetParent(container, false);
+		}
 	}
 
 	void AddWallSegment(Vector3 pivot, HexCell pivotCell, 
@@ -161,7 +173,7 @@ public class HexFeatureManager : MonoBehaviour
 		{
 			if (hasRighWall)
 			{
-				AddWallSegment(pivot, left, pivot, right);
+				AddWallSegment(pivot, left, pivot, right, true);
 			}
 			else if (leftCell.Elevation < rightCell.Elevation)
 			{

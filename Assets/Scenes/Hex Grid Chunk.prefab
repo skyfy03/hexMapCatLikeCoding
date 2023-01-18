@@ -549,6 +549,10 @@ PrefabInstance:
       propertyPath: walls
       value: 
       objectReference: {fileID: 516190403229337357}
+    - target: {fileID: 2033943984601015428, guid: 71917f395439d004a81cb474b45b51cd, type: 3}
+      propertyPath: wallTower
+      value: 
+      objectReference: {fileID: 8757364175625920651, guid: a578b09ec4ec1d348a39cab58cbe8206, type: 3}
     - target: {fileID: 3740658056382016406, guid: 71917f395439d004a81cb474b45b51cd, type: 3}
       propertyPath: m_RootOrder
       value: 7
