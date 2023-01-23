@@ -4,8 +4,9 @@ MonoImporter:
   externalObjects: {}
   serializedVersion: 2
   defaultReferences:
-  - walls: {fileID: 8470245168750680727, guid: 545c6b9cd0de68b42b7ee7ec68e20ee0, type: 3}
-  - wallTower: {fileID: 8757364175625920651, guid: a578b09ec4ec1d348a39cab58cbe8206, type: 3}
+  - walls: {instanceID: 0}
+  - wallTower: {instanceID: 0}
+  - bridge: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

@@ -44,6 +44,9 @@ public class HexMapEditor : MonoBehaviour
 	int activePlantLevel;
 	bool applyPlantLevel;
 
+	int activeSpecialIndex;
+	bool applySpecialIndex;
+
 	#endregion
 
 	void Awake()
@@ -140,6 +143,10 @@ public class HexMapEditor : MonoBehaviour
 			if (applyWaterLevel)
 			{
 				cell.WaterLevel = activeWaterLevel;
+			}
+			if (applySpecialIndex)
+			{
+				cell.SpecialIndex = activeSpecialIndex;
 			}
 			if (applyUrbanLevel)
 			{
@@ -266,5 +273,16 @@ public class HexMapEditor : MonoBehaviour
 	{
 		walledMode = (OptionalToggle)mode;
 	}
+
+	public void SetApplySpecialIndex(bool toggle)
+	{
+		applySpecialIndex = toggle;
+	}
+
+	public void SetSpecialIndex(float index)
+	{
+		activeSpecialIndex = (int)index;
+	}
+
 
 }

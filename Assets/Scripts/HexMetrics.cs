@@ -145,6 +145,8 @@ public class HexMetrics : MonoBehaviour
 
 	public const float wallTowerThreshold = 0.5f;
 
+	public const float bridgeDesignLength = 7f;
+
 	#endregion
 
 	public static Vector3 Perturb(Vector3 position)
