@@ -1,18 +1,14 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
+using System.IO;
 
 public class HexMapEditor : MonoBehaviour
 {
 
 	#region Fields
 
-	public Color[] colors;
-
 	public HexGrid hexGrid;
 
-	private Color activeColor;
-
-	bool applyColor;
 	bool applyElevation = true;
 	bool applyWaterLevel = true;
 
@@ -47,12 +43,41 @@ public class HexMapEditor : MonoBehaviour
 	int activeSpecialIndex;
 	bool applySpecialIndex;
 
-	#endregion
+	int activeTerrainTypeIndex;
 
-	void Awake()
+	public void Save()
 	{
-		SelectColor(0);
+		string path = Path.Combine(Application.persistentDataPath, "test.map");
+
+		using (
+			BinaryWriter writer =
+				new BinaryWriter(File.Open(path, FileMode.Create))
+		)
+		{
+			writer.Write(0);
+			hexGrid.Save(writer);
+		}
+
 	}
+
+	public void Load()
+	{
+		string path = Path.Combine(Application.persistentDataPath, "test.map");
+		using (BinaryReader reader = new BinaryReader(File.OpenRead(path)))
+		{
+			int header = reader.ReadInt32();
+			if (header == 0)
+			{
+				hexGrid.Load(reader);
+			}
+			else
+			{
+				Debug.LogWarning("Unknown map format " + header);
+			}
+		}
+	}
+
+	#endregion
 
 	void Update()
 	{
@@ -132,9 +157,9 @@ public class HexMapEditor : MonoBehaviour
 	{
 		if (cell)
 		{
-			if (applyColor)
+			if (activeTerrainTypeIndex >= 0)
 			{
-				cell.Color = activeColor;
+				cell.TerrainTypeIndex = activeTerrainTypeIndex;
 			}
 			if (applyElevation)
 			{
@@ -187,15 +212,6 @@ public class HexMapEditor : MonoBehaviour
 					}
 				}
 			}
-		}
-	}
-
-	public void SelectColor(int index)
-	{
-		applyColor = index >= 0;
-		if (applyColor)
-		{
-			activeColor = colors[index];
 		}
 	}
 
@@ -284,5 +300,9 @@ public class HexMapEditor : MonoBehaviour
 		activeSpecialIndex = (int)index;
 	}
 
+	public void SetTerrainTypeIndex(int index)
+	{
+		activeTerrainTypeIndex = index;
+	}
 
 }

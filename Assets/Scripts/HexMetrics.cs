@@ -147,6 +147,8 @@ public class HexMetrics : MonoBehaviour
 
 	public const float bridgeDesignLength = 7f;
 
+	public static Color[] colors;
+
 	#endregion
 
 	public static Vector3 Perturb(Vector3 position)
