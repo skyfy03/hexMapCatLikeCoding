@@ -98,3 +98,5 @@ MonoBehaviour:
   useCollider: 1
   useColors: 1
   useUVCoordinates: 0
+  useUV2Coordinates: 0
+  useTerrainTypes: 1

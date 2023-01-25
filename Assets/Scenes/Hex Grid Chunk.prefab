@@ -516,6 +516,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Terrain
       objectReference: {fileID: 0}
+    - target: {fileID: 9105104348863755880, guid: a6e37cc7bb475a244956926bdf4333fa, type: 3}
+      propertyPath: useTerrainTypes
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9105104348863755880, guid: a6e37cc7bb475a244956926bdf4333fa, type: 3}
+      propertyPath: useUV2Coordinates
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a6e37cc7bb475a244956926bdf4333fa, type: 3}
 --- !u!4 &7146970771572355854 stripped
