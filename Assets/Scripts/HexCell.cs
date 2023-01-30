@@ -215,6 +215,20 @@ public class HexCell : MonoBehaviour
 
 	int distance;
 
+	public HexCell PathFrom { get; set; }
+
+	public int SearchHeuristic { get; set; }
+
+	public int SearchPriority
+	{
+		get
+		{
+			return distance + SearchHeuristic;
+		}
+	}
+
+	public HexCell NextWithSamePriority { get; set; }
+
 	#endregion
 
 	#region Properties
@@ -628,6 +642,19 @@ public class HexCell : MonoBehaviour
 			distance = value;
 			UpdateDistanceLabel();
 		}
+	}
+
+	public void DisableHighlight()
+	{
+		Image highlight = uiRect.GetChild(0).GetComponent<Image>();
+		highlight.enabled = false;
+	}
+
+	public void EnableHighlight(Color color)
+	{
+		Image highlight = uiRect.GetChild(0).GetComponent<Image>();
+		highlight.color = color;
+		highlight.enabled = true;
 	}
 
 	#endregion
