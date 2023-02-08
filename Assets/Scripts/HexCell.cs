@@ -231,6 +231,8 @@ public class HexCell : MonoBehaviour
 
 	public int SearchPhase { get; set; }
 
+	public HexUnit Unit { get; set; }
+
 	#endregion
 
 	#region Properties
@@ -291,6 +293,10 @@ public class HexCell : MonoBehaviour
 					neighbor.chunk.Refresh();
 				}
 			}
+			if (Unit)
+			{
+				Unit.ValidateLocation();
+			}
 		}
 	}
 	#endregion
@@ -299,6 +305,10 @@ public class HexCell : MonoBehaviour
 	void RefreshSelfOnly()
 	{
 		chunk.Refresh();
+		if (Unit)
+		{
+			Unit.ValidateLocation();
+		}
 	}
 	#endregion
 
