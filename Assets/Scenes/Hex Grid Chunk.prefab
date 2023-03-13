@@ -172,6 +172,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4919459909163572485}
     m_Modifications:
+    - target: {fileID: 4008220920306366043, guid: 7c3864a1af05cc44b98a5bc6d2c8b547, type: 3}
+      propertyPath: useCellData
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4970041702501899630, guid: 7c3864a1af05cc44b98a5bc6d2c8b547, type: 3}
       propertyPath: m_Name
       value: Water Shore
@@ -245,6 +249,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4919459909163572485}
     m_Modifications:
+    - target: {fileID: 1198005790616439981, guid: f02083cee77e68f4aac393eec60e1b27, type: 3}
+      propertyPath: useCellData
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7203796513681270680, guid: f02083cee77e68f4aac393eec60e1b27, type: 3}
       propertyPath: m_Name
       value: Rivers
@@ -366,6 +374,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Roads
       objectReference: {fileID: 0}
+    - target: {fileID: 7611076650177580520, guid: 1d97bdc457165a245ab57fb785e2825a, type: 3}
+      propertyPath: useCellData
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1d97bdc457165a245ab57fb785e2825a, type: 3}
 --- !u!4 &1337887322326961481 stripped
@@ -391,6 +403,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4919459909163572485}
     m_Modifications:
+    - target: {fileID: 4008220920306366043, guid: 7c3864a1af05cc44b98a5bc6d2c8b547, type: 3}
+      propertyPath: useCellData
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4008220920306366043, guid: 7c3864a1af05cc44b98a5bc6d2c8b547, type: 3}
       propertyPath: useUV2Coordinates
       value: 1
@@ -701,6 +717,10 @@ PrefabInstance:
     - target: {fileID: 1153303974261787592, guid: 4c545a190802c1a46ac1a4be203325c2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8542694245426881328, guid: 4c545a190802c1a46ac1a4be203325c2, type: 3}
+      propertyPath: useCellData
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4c545a190802c1a46ac1a4be203325c2, type: 3}

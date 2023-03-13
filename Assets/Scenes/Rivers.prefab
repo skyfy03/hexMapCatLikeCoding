@@ -96,5 +96,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   elevation: 0
   useCollider: 0
-  useColors: 0
+  useCellData: 1
   useUVCoordinates: 1
+  useUV2Coordinates: 0

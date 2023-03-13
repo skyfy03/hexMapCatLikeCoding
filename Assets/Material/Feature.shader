@@ -1,4 +1,4 @@
-﻿Shader "Custom/Road"
+﻿Shader "Custom/Feature"
 {
     Properties
     {
@@ -6,31 +6,27 @@
         _MainTex ("Albedo (RGB)", 2D) = "white" {}
         _Glossiness ("Smoothness", Range(0,1)) = 0.5
         _Metallic ("Metallic", Range(0,1)) = 0.0
+        [NoScaleOffset] _GridCoordinates("Grid Coordinates", 2D) = "white" {}
     }
     SubShader
     {
-        Tags { 
-            "RenderType"="Opaque"
-            "Queue" = "Geometry+1"
-        }
+        Tags { "RenderType"="Opaque" }
         LOD 200
-        Offset -1, -1
 
         CGPROGRAM
         // Physically based Standard lighting model, and enable shadows on all light types
-        #pragma surface surf Standard fullforwardshadows decal:blend vertex:vert
+        #pragma surface surf Standard fullforwardshadows
 
         // Use shader model 3.0 target, to get nicer looking lighting
         #pragma target 3.0
 
         #include "HexCellData.cginc"
 
-        sampler2D _MainTex;
+        sampler2D _MainTex, _GridCoordinates;
 
         struct Input
         {
             float2 uv_MainTex;
-            float3 worldPos;
             float visibility;
         };
 
@@ -44,31 +40,30 @@
         UNITY_INSTANCING_BUFFER_START(Props)
             // put more per-instance properties here
         UNITY_INSTANCING_BUFFER_END(Props)
-
+            
         void vert(inout appdata_full v, out Input data) {
             UNITY_INITIALIZE_OUTPUT(Input, data);
+            float3 pos = mul(unity_ObjectToWorld, v.vertex);
 
-            float4 cell0 = GetCellData(v, 0);
-            float4 cell1 = GetCellData(v, 1);
+            float4 gridUV = float4(pos.xz, 0, 0);
+            gridUV.x *= 1 / (4 * 8.66025404);
+            gridUV.y *= 1 / (2 * 15.0); 
+            float2 cellDataCoordinates =
+                floor(gridUV.xy) + tex2Dlod(_GridCoordinates, gridUV).rg;
+            cellDataCoordinates *= 2;
 
-            data.visibility = cell0.x * v.color.x + cell1.x * v.color.y;
+            data.visibility = GetCellData(cellDataCoordinates).x;
             data.visibility = lerp(0.25, 1, data.visibility);
         }
-
         void surf (Input IN, inout SurfaceOutputStandard o)
         {
-            float4 noise = tex2D(_MainTex, IN.worldPos.xz * 0.025);
             // Albedo comes from a texture tinted by color
-            fixed4 c = _Color * ((noise.y * 0.75 + 0.25) * IN.visibility);
-            float blend = IN.uv_MainTex.x;
-            blend *= noise.x + 0.5;
-            blend = smoothstep(0.4, 0.7, blend);
-
-            o.Albedo = c.rgb;
+            fixed4 c = tex2D (_MainTex, IN.uv_MainTex) * _Color;
+            o.Albedo = c.rgb * IN.visibility;
             // Metallic and smoothness come from slider variables
             o.Metallic = _Metallic;
             o.Smoothness = _Glossiness;
-            o.Alpha = blend;
+            o.Alpha = c.a;
         }
         ENDCG
     }
