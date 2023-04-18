@@ -253,7 +253,7 @@ public class HexGrid : MonoBehaviour
 
 		for (int i = 0; i < cells.Length; i++)
 		{
-			cells[i].Load(reader);
+			cells[i].Load(reader, header);
 		}
 
 		for (int i = 0; i < chunks.Length; i++)
@@ -271,16 +271,17 @@ public class HexGrid : MonoBehaviour
 		}
 	}
 
-	public void FindPath(HexCell fromCell, HexCell toCell, int speed)
+	public void FindPath(HexCell fromCell, HexCell toCell, HexUnit unit)
 	{
 		ClearPath();
 		currentPathFrom = fromCell;
 		currentPathTo = toCell;
-		currentPathExists = Search(fromCell, toCell, speed);
-		ShowPath(speed);
+		currentPathExists = Search(fromCell, toCell, unit);
+		ShowPath(unit.Speed);
 	}
 
-	bool Search (HexCell fromCell, HexCell toCell, int speed) {
+	bool Search (HexCell fromCell, HexCell toCell, HexUnit unit) {
+		int speed = unit.Speed;
 		searchFrontierPhase += 2;
 		if (searchFrontier == null)
 		{
@@ -308,38 +309,26 @@ public class HexGrid : MonoBehaviour
 			for (HexDirection d = HexDirection.NE; d<= HexDirection.NW; d++)
 			{
 				HexCell neighbor = current.GetNeighbor(d);
-				if (neighbor == null || neighbor.SearchPhase > searchFrontierPhase)
-				{
-					continue;
-				}
-				if (neighbor.IsUnderwater || neighbor.Unit)
-				{
-					continue;
-				}
-				HexMetrics.HexEdgeType edgeType = current.GetEdgeType(neighbor);
-				if (edgeType == HexMetrics.HexEdgeType.Cliff)
+				if (
+					neighbor == null ||
+					neighbor.SearchPhase > searchFrontierPhase
+				)
 				{
 					continue;
 				}
 
-				int moveCost;
-				if (current.HasRoadThroughEdge(d))
-				{
-					moveCost = 1;
-				}
-				else if (current.Walled != neighbor.Walled)
+				if (!unit.IsValidDestination(neighbor))
 				{
 					continue;
 				}
-				else
+				int moveCost = unit.GetMoveCost(current, neighbor, d);
+				if (moveCost < 0)
 				{
-					moveCost = edgeType == HexMetrics.HexEdgeType.Flat ? 5 : 10;
-					moveCost += neighbor.UrbanLevel + neighbor.FarmLevel + neighbor.PlantLevel;
+					continue;
 				}
 
 				int distance = current.Distance + moveCost;
 				int turn = (distance - 1) / speed;
-
 				if (turn > currentTurn)
 				{
 					distance = turn * speed + moveCost;
