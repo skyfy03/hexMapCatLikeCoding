@@ -199,6 +199,16 @@ public class HexGrid : MonoBehaviour
 		return cells[x + z * cellCountX];
 	}
 
+	public HexCell GetCell(int xOffset, int zOffset)
+	{
+		return cells[xOffset + zOffset * cellCountX];
+	}
+
+	public HexCell GetCell(int cellIndex)
+	{
+		return cells[cellIndex];
+	}
+
 	void OnEnable()
 	{
 		if (!HexMetrics.noiseSource)
