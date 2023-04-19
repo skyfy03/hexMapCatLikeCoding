@@ -54,7 +54,7 @@ public class HexMapGenerator : MonoBehaviour
 		Random.State originalRandomState = Random.state;
 		if (!useFixedSeed)
 		{
-			seed = Random.RandomRange(0, int.MaxValue);
+			seed = Random.Range(0, int.MaxValue);
 			seed ^= (int)System.DateTime.Now.Ticks;
 			seed ^= (int)Time.unscaledTime;
 			seed &= int.MaxValue;
@@ -67,15 +67,12 @@ public class HexMapGenerator : MonoBehaviour
 		{
 			searchFrontier = new HexCellPriorityQueue();
 		}
-
 		for (int i = 0; i < cellCount; i++)
 		{
 			grid.GetCell(i).WaterLevel = waterLevel;
 		}
-
 		CreateLand();
 		SetTerrainType();
-
 		for (int i = 0; i < cellCount; i++)
 		{
 			grid.GetCell(i).SearchPhase = 0;
@@ -101,7 +98,7 @@ public class HexMapGenerator : MonoBehaviour
 		}
 	}
 
-	int RaiseTerrain (int chunkSize, int budget)
+	int RaiseTerrain(int chunkSize, int budget)
 	{
 		searchFrontierPhase += 1;
 		HexCell firstCell = GetRandomCell();
@@ -122,13 +119,14 @@ public class HexMapGenerator : MonoBehaviour
 			{
 				continue;
 			}
-			current.Elevation = originalElevation + newElevation;
-			if (originalElevation < waterLevel && 
-				newElevation >= waterLevel && --budget == 0)
+			current.Elevation = newElevation;
+			if (
+				originalElevation < waterLevel &&
+				newElevation >= waterLevel && --budget == 0
+			)
 			{
 				break;
 			}
-
 			size += 1;
 
 			for (HexDirection d = HexDirection.NE; d <= HexDirection.NW; d++)
@@ -138,14 +136,13 @@ public class HexMapGenerator : MonoBehaviour
 				{
 					neighbor.SearchPhase = searchFrontierPhase;
 					neighbor.Distance = neighbor.coordinates.DistanceTo(center);
-					neighbor.SearchHeuristic = 
+					neighbor.SearchHeuristic =
 						Random.value < jitterProbability ? 1 : 0;
 					searchFrontier.Enqueue(neighbor);
 				}
 			}
 		}
 		searchFrontier.Clear();
-
 		return budget;
 	}
 
@@ -171,8 +168,10 @@ public class HexMapGenerator : MonoBehaviour
 				continue;
 			}
 			current.Elevation = newElevation;
-			if (originalElevation >= waterLevel && 
-				newElevation < waterLevel)
+			if (
+				originalElevation >= waterLevel &&
+				newElevation < waterLevel
+			)
 			{
 				budget += 1;
 			}
@@ -192,14 +191,7 @@ public class HexMapGenerator : MonoBehaviour
 			}
 		}
 		searchFrontier.Clear();
-
 		return budget;
-	}
-
-
-	HexCell GetRandomCell()
-	{
-		return grid.GetCell(Random.Range(0, cellCount));
 	}
 
 	void SetTerrainType()
@@ -212,6 +204,11 @@ public class HexMapGenerator : MonoBehaviour
 				cell.TerrainTypeIndex = cell.Elevation - cell.WaterLevel;
 			}
 		}
+	}
+
+	HexCell GetRandomCell()
+	{
+		return grid.GetCell(Random.Range(0, cellCount));
 	}
 
 	#endregion
