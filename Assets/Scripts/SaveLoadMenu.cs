@@ -20,7 +20,7 @@ public class SaveLoadMenu : MonoBehaviour
 
 	public SaveLoadItem itemPrefab;
 
-	const int mapFileVersion = 4;
+	const int mapFileVersion = 5;
 
 	#endregion
 

@@ -12,6 +12,8 @@ public class HexMetrics : MonoBehaviour
 	public const float outerRadius = 10f;
 
 	public const float innerRadius = outerRadius * outerToInner;
+	public const float innerDiameter = innerRadius * 2f;
+
 	public const float elevationStep = 2f;//elevation level
 
 	static Vector3[] corners = {
@@ -147,7 +149,19 @@ public class HexMetrics : MonoBehaviour
 
 	public const float bridgeDesignLength = 7f;
 
+	public static int wrapSize;
+
+	public static bool Wrapping
+	{
+		get
+		{
+			return wrapSize > 0;
+		}
+	}
+
 	#endregion
+
+	#region Properties
 
 	public static Vector3 Perturb(Vector3 position)
 	{
@@ -172,10 +186,23 @@ public class HexMetrics : MonoBehaviour
 
 	public static Vector4 SampleNoise(Vector3 position)
 	{
-		return noiseSource.GetPixelBilinear(
+		Vector4 sample = noiseSource.GetPixelBilinear(
 			position.x * noiseScale, 
 			position.z * noiseScale
 		);
+
+		if (Wrapping && position.x < innerDiameter * 1.5f)
+		{
+			Vector4 sample2 = noiseSource.GetPixelBilinear(
+				(position.x + wrapSize * innerDiameter) * noiseScale,
+				position.z * noiseScale
+			);
+			sample = Vector4.Lerp(
+				sample2, sample, position.x * (1f / innerDiameter) - 0.5f
+			);
+		}
+
+		return sample;
 	}
 
 	public static HexEdgeType GetEdgeType(int elevation1, int elevation2)
@@ -243,5 +270,7 @@ public class HexMetrics : MonoBehaviour
 		near.y += (far.y - near.y) * v + wallYOffSet;
 		return near;
 	}
+
+	#endregion
 
 }

@@ -3,11 +3,18 @@
 public class NewMapMenu : MonoBehaviour
 {
 
+	#region Fields
+
 	public HexGrid hexGrid;
 
 	bool generateMaps = true;
+	bool wrapping = true;
 
 	public HexMapGenerator mapGenerator;
+
+	#endregion
+
+	#region Properties
 
 	public void Open()
 	{
@@ -25,11 +32,11 @@ public class NewMapMenu : MonoBehaviour
 	{
 		if (generateMaps)
 		{
-			mapGenerator.GenerateMap(x, z);
+			mapGenerator.GenerateMap(x, z, wrapping);
 		}
 		else
 		{
-			hexGrid.CreateMap(x, z);
+			hexGrid.CreateMap(x, z, wrapping);
 		}
 		HexMapCamera.ValidatePosition();
 		Close();
@@ -54,5 +61,12 @@ public class NewMapMenu : MonoBehaviour
 	{
 		generateMaps = toggle;
 	}
+
+	public void ToggleWrapping(bool toggle)
+	{
+		wrapping = toggle;
+	}
+
+	#endregion
 
 }

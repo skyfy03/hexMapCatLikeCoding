@@ -281,6 +281,8 @@ public class HexCell : MonoBehaviour
 		}
 	}
 
+	public int ColumnIndex { get; set; }
+
 	#endregion
 
 	#region Properties
